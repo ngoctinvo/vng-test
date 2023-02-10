@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Orders from "./containers/Orders";
 import Customers from "./containers/Customers";
@@ -10,15 +10,15 @@ import NotFound from "./components/NotFound";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+      <Switch>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
           <Route path="Employees" element={<Employees />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="404" element={<NotFound />} />
         </Route>
-      </Routes>
+      </Switch>
     </BrowserRouter>
   );
 }
