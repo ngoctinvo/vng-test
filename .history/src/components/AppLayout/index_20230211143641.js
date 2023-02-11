@@ -16,7 +16,7 @@ const AppLayout = () => {
   return (
     <StyledLayout>
       <AppBar />
-      <Outlet />
+      <Outlet style={{ minWidth: "calc(100vw - 100px)" }} />
     </StyledLayout>
   );
 };

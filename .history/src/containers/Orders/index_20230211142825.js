@@ -1,12 +1,6 @@
 import React from "react";
 import Table from "../../components/Table";
-import data from "../../mock-data/orders.json";
-
-import { styled } from "@linaria/react";
-
-const Wrapper = styled.div`
-  width: 100%;
-`;
+import data from "../../../mock-data/orders.json";
 
 const Orders = () => {
   const handleEditRecord = (record, index) => {
@@ -16,7 +10,7 @@ const Orders = () => {
     console.log("edit", record, index);
   };
   return (
-    <Wrapper>
+    <div>
       <Table
         records={data}
         heading={[
@@ -28,9 +22,8 @@ const Orders = () => {
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[10, 20, 15, 15, 20, 20]}
       />
-    </Wrapper>
+    </div>
   );
 };
 

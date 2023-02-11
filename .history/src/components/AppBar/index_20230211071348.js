@@ -6,7 +6,7 @@ import OrderIcon from "../../icons/order";
 import CustomerIcon from "../../icons/customer";
 import EmployeeIcon from "../../icons/employee";
 
-const NavItem = styled.a`
+const NavItem = styled.a `
   width: 100px;
   height: 100px;
   cursor: pointer;
@@ -25,7 +25,7 @@ const NavItem = styled.a`
   }
 `;
 
-const NavBar = styled.div`
+const NavBar = styled.div `
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -37,8 +37,8 @@ const NavBar = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
-  background-color: #134b5f;
+const Wrapper = styled.div `
+  background-color: #0b2d39;
   height: 100vh;
   @media (max-width: 768px) {
     flex-direction: row;
@@ -48,27 +48,33 @@ const Wrapper = styled.div`
 `;
 
 const AppBar = () => {
-  return (
-    <Wrapper>
-      <NavBar>
-        <NavItem href="/">
-          <HomeIcon />
-          Home{" "}
-        </NavItem>{" "}
-        <NavItem href="/orders">
-          <OrderIcon />
-          Orders{" "}
-        </NavItem>{" "}
-        <NavItem href="/customers">
-          <CustomerIcon /> Customers{" "}
-        </NavItem>{" "}
-        <NavItem href="/employees">
-          <EmployeeIcon />
-          Employees{" "}
-        </NavItem>{" "}
-      </NavBar>{" "}
-    </Wrapper>
-  );
+    return ( <
+        Wrapper >
+        <
+        NavBar >
+        <
+        NavItem href = "/" >
+        <
+        HomeIcon / >
+        Home { " " } <
+        /NavItem>{" "} <
+        NavItem href = "/orders" >
+        <
+        OrderIcon / >
+        Orders { " " } <
+        /NavItem>{" "} <
+        NavItem href = "/customers" >
+        <
+        CustomerIcon / > Customers { " " } <
+        /NavItem>{" "} <
+        NavItem href = "/employees" >
+        <
+        EmployeeIcon / >
+        Employees { " " } <
+        /NavItem>{" "} <
+        /NavBar>{" "} <
+        /Wrapper>
+    );
 };
 
 export default AppBar;

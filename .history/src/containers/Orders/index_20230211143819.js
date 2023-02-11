@@ -28,7 +28,7 @@ const Orders = () => {
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[10, 20, 15, 15, 20, 20]}
+        template={[]}
       />
     </Wrapper>
   );

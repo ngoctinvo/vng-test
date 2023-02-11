@@ -7,17 +7,18 @@ import CustomerIcon from "../../icons/customer";
 import EmployeeIcon from "../../icons/employee";
 
 const NavItem = styled.a`
+  background-color: #bbeaea;
   width: 100px;
   height: 100px;
+  border: 1px solid #aaecec;
   cursor: pointer;
   text-decoration: none;
   font-size: 20px;
   color: gray;
   margin: auto;
-  color: white;
   display: block;
   &:hover {
-    background-color: #165a72;
+    background-color: #aaecec;
   }
   svg {
     width: 20px;
@@ -29,17 +30,8 @@ const NavBar = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0;
-  height: fit-content;
-  width: 100px;
-  @media (max-width: 768px) {
-    flex-direction: row;
-    height: 100%;
-  }
-`;
-
-const Wrapper = styled.div`
-  background-color: #134b5f;
   height: 100vh;
+  width: 100px;
   @media (max-width: 768px) {
     flex-direction: row;
     width: 100vw;
@@ -49,25 +41,23 @@ const Wrapper = styled.div`
 
 const AppBar = () => {
   return (
-    <Wrapper>
-      <NavBar>
-        <NavItem href="/">
-          <HomeIcon />
-          Home{" "}
-        </NavItem>{" "}
-        <NavItem href="/orders">
-          <OrderIcon />
-          Orders{" "}
-        </NavItem>{" "}
-        <NavItem href="/customers">
-          <CustomerIcon /> Customers{" "}
-        </NavItem>{" "}
-        <NavItem href="/employees">
-          <EmployeeIcon />
-          Employees{" "}
-        </NavItem>{" "}
-      </NavBar>{" "}
-    </Wrapper>
+    <NavBar>
+      <NavItem href="/">
+        <HomeIcon />
+        Home
+      </NavItem>
+      <NavItem href="/orders">
+        <OrderIcon />
+        Orders
+      </NavItem>
+      <NavItem href="/customers">
+        <CustomerIcon /> Customers
+      </NavItem>
+      <NavItem href="/employees">
+        <EmployeeIcon />
+        Employees
+      </NavItem>
+    </NavBar>
   );
 };
 

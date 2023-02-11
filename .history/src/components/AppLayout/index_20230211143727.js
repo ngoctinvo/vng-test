@@ -16,7 +16,7 @@ const AppLayout = () => {
   return (
     <StyledLayout>
       <AppBar />
-      <Outlet />
+      <Outlet style={{ width: "100%" }} />
     </StyledLayout>
   );
 };

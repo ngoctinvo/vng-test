@@ -14,10 +14,9 @@ const NavItem = styled.a`
   font-size: 20px;
   color: gray;
   margin: auto;
-  color: white;
   display: block;
   &:hover {
-    background-color: #165a72;
+    background-color: #aaecec;
   }
   svg {
     width: 20px;
@@ -38,7 +37,7 @@ const NavBar = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: #134b5f;
+  background-color: #bbeaea;
   height: 100vh;
   @media (max-width: 768px) {
     flex-direction: row;
@@ -53,20 +52,20 @@ const AppBar = () => {
       <NavBar>
         <NavItem href="/">
           <HomeIcon />
-          Home{" "}
-        </NavItem>{" "}
+          Home
+        </NavItem>
         <NavItem href="/orders">
           <OrderIcon />
-          Orders{" "}
-        </NavItem>{" "}
+          Orders
+        </NavItem>
         <NavItem href="/customers">
-          <CustomerIcon /> Customers{" "}
-        </NavItem>{" "}
+          <CustomerIcon /> Customers
+        </NavItem>
         <NavItem href="/employees">
           <EmployeeIcon />
-          Employees{" "}
-        </NavItem>{" "}
-      </NavBar>{" "}
+          Employees
+        </NavItem>
+      </NavBar>
     </Wrapper>
   );
 };
