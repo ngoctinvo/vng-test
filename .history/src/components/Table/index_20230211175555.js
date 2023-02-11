@@ -64,6 +64,10 @@ const Wrapper = styled.div`
 `;
 
 const Table = (props) => {
+  const [checkList, setCheckList] = useState([]);
+  useEffect(() => {
+    filterRecords(checkList);
+  }, [checkList]);
   const {
     template = [30, 20, 30, 20],
     align = "center",
@@ -72,8 +76,7 @@ const Table = (props) => {
     records = [],
     heading,
     width,
-    checkList,
-    setCheckList,
+    filterRecords,
   } = props;
   return (
     <Wrapper width={width}>

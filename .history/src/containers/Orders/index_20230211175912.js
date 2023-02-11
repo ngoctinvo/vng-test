@@ -51,8 +51,10 @@ const Orders = () => {
     toast("Deleted");
   };
 
-  const filterRecords = () => {
-    return ordersList.filter((order, index) => checkList.includes(index));
+  const filterRecords = (checkList) => {
+    exportedRecords = ordersList.filter((order, index) =>
+      checkList.includes(index)
+    );
   };
 
   return (
@@ -65,7 +67,7 @@ const Orders = () => {
         >
           <AddIcon /> Add
         </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
+        <ExportExcel data={exportedRecords} />
       </ControlButtons>
 
       <Popup

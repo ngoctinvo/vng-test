@@ -38,10 +38,8 @@ const emptyOrder = {
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(emptyOrder);
-  const [checkList, setCheckList] = useState([]);
   const dispatch = useDispatch();
   const { ordersList = [] } = useSelector((state) => state.orders);
-  let exportedRecords = [];
   const handleEditRecord = (record, index) => {
     setSelectedOrder({ ...record });
     setOpen(true);
@@ -51,8 +49,8 @@ const Orders = () => {
     toast("Deleted");
   };
 
-  const filterRecords = () => {
-    return ordersList.filter((order, index) => checkList.includes(index));
+  const filterRecords = (checkList) => {
+    ordersList.filter((order, index) => checkList.includes(index));
   };
 
   return (
@@ -65,7 +63,7 @@ const Orders = () => {
         >
           <AddIcon /> Add
         </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
+        <ExportExcel data={ordersList} />
       </ControlButtons>
 
       <Popup
@@ -154,8 +152,6 @@ const Orders = () => {
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
         template={[5, 10, 20, 15, 15, 20, 15]}
-        checkList={checkList}
-        setCheckList={setCheckList}
       />
       <ToastContainer />
     </Wrapper>

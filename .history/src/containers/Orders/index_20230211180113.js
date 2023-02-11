@@ -65,7 +65,7 @@ const Orders = () => {
         >
           <AddIcon /> Add
         </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
+        <ExportExcel data={filterRecords()} />
       </ControlButtons>
 
       <Popup

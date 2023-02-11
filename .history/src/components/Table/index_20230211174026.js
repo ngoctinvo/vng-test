@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DeleteIcon from "../../icons/delete";
 import EditIcon from "../../icons/edit";
 
@@ -64,6 +64,7 @@ const Wrapper = styled.div`
 `;
 
 const Table = (props) => {
+  const [checkList, setCheckList] = useState([]);
   const {
     template = [30, 20, 30, 20],
     align = "center",
@@ -72,24 +73,12 @@ const Table = (props) => {
     records = [],
     heading,
     width,
-    checkList,
-    setCheckList,
   } = props;
   return (
     <Wrapper width={width}>
       <StyledHeading>
         <HeadingCell align={align} width={template[0]}>
-          <input
-            type="checkbox"
-            onChange={(e) => {
-              console.log(checkList);
-              if (e.target.checked) {
-                setCheckList([...Array(records.length).keys()]);
-              } else {
-                setCheckList([]);
-              }
-            }}
-          />
+          <input type="checkbox" />
         </HeadingCell>
         {heading.map((tit, index) => (
           <HeadingCell width={template[index]} align={align}>
@@ -110,19 +99,9 @@ const Table = (props) => {
                   type="checkbox"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      const newList = [...checkList, index];
-                      console.log(newList);
-
-                      setCheckList(newList);
-                    } else {
-                      const newList = checkList.filter(
-                        (item) => item !== index
-                      );
-                      setCheckList(newList);
-                      console.log(newList);
+                      setCheckList([...checkList, record]);
                     }
                   }}
-                  checked={checkList.includes(index)}
                 />
               </Cell>
               {Object.values(record).map((val, index) => (

@@ -11,20 +11,9 @@ import {
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import AddIcon from "../../icons/add";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ExportExcel from "../../components/ExportExcel";
 
 const Wrapper = styled.div`
   width: 100%;
-`;
-
-const ControlButtons = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
 `;
 
 const emptyOrder = {
@@ -38,36 +27,26 @@ const emptyOrder = {
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(emptyOrder);
-  const [checkList, setCheckList] = useState([]);
   const dispatch = useDispatch();
   const { ordersList = [] } = useSelector((state) => state.orders);
-  let exportedRecords = [];
   const handleEditRecord = (record, index) => {
     setSelectedOrder({ ...record });
     setOpen(true);
   };
   const handleDeleteRecord = (record, index) => {
+    console.log(record.order_number);
     dispatch(deleteOrder(record.order_number));
-    toast("Deleted");
-  };
-
-  const filterRecords = () => {
-    return ordersList.filter((order, index) => checkList.includes(index));
   };
 
   return (
     <Wrapper>
-      <ControlButtons>
-        <Button
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <AddIcon /> Add
-        </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
-      </ControlButtons>
-
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <AddIcon /> Add
+      </Button>
       <Popup
         open={open}
         onClose={() => {
@@ -129,10 +108,8 @@ const Orders = () => {
           onClick={() => {
             if (selectedOrder.order_number === 0) {
               dispatch(createOrder(selectedOrder));
-              toast("Created");
             } else {
               dispatch(updateOrder(selectedOrder));
-              toast("Updated");
             }
             setSelectedOrder({ ...emptyOrder });
             setOpen(false);
@@ -153,11 +130,8 @@ const Orders = () => {
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[5, 10, 20, 15, 15, 20, 15]}
-        checkList={checkList}
-        setCheckList={setCheckList}
+        template={[10, 20, 15, 15, 20, 20]}
       />
-      <ToastContainer />
     </Wrapper>
   );
 };

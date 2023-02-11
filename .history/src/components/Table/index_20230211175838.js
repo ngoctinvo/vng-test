@@ -64,6 +64,9 @@ const Wrapper = styled.div`
 `;
 
 const Table = (props) => {
+  useEffect(() => {
+    filterRecords(checkList);
+  }, [checkList]);
   const {
     template = [30, 20, 30, 20],
     align = "center",

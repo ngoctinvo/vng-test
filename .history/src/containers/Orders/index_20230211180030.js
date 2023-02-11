@@ -52,7 +52,7 @@ const Orders = () => {
   };
 
   const filterRecords = () => {
-    return ordersList.filter((order, index) => checkList.includes(index));
+    return checkList.filter((order, index) => checkList.includes(index));
   };
 
   return (
@@ -65,7 +65,7 @@ const Orders = () => {
         >
           <AddIcon /> Add
         </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
+        <ExportExcel data={filterRecords()} />
       </ControlButtons>
 
       <Popup

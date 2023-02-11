@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DeleteIcon from "../../icons/delete";
 import EditIcon from "../../icons/edit";
 
@@ -64,6 +64,7 @@ const Wrapper = styled.div`
 `;
 
 const Table = (props) => {
+  const [checkList, setCheckList] = useState([]);
   const {
     template = [30, 20, 30, 20],
     align = "center",
@@ -72,8 +73,6 @@ const Table = (props) => {
     records = [],
     heading,
     width,
-    checkList,
-    setCheckList,
   } = props;
   return (
     <Wrapper width={width}>
@@ -110,19 +109,15 @@ const Table = (props) => {
                   type="checkbox"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      const newList = [...checkList, index];
-                      console.log(newList);
-
-                      setCheckList(newList);
+                      setCheckList([...checkList, index]);
                     } else {
                       const newList = checkList.filter(
                         (item) => item !== index
                       );
                       setCheckList(newList);
-                      console.log(newList);
                     }
                   }}
-                  checked={checkList.includes(index)}
+                  checked={checkList[index]}
                 />
               </Cell>
               {Object.values(record).map((val, index) => (

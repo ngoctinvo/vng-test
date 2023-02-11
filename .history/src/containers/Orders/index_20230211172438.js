@@ -19,14 +19,6 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const ControlButtons = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
 const emptyOrder = {
   order_number: 0,
   customer_id: 0,
@@ -38,10 +30,8 @@ const emptyOrder = {
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(emptyOrder);
-  const [checkList, setCheckList] = useState([]);
   const dispatch = useDispatch();
   const { ordersList = [] } = useSelector((state) => state.orders);
-  let exportedRecords = [];
   const handleEditRecord = (record, index) => {
     setSelectedOrder({ ...record });
     setOpen(true);
@@ -51,23 +41,16 @@ const Orders = () => {
     toast("Deleted");
   };
 
-  const filterRecords = () => {
-    return ordersList.filter((order, index) => checkList.includes(index));
-  };
-
   return (
     <Wrapper>
-      <ControlButtons>
-        <Button
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <AddIcon /> Add
-        </Button>
-        <ExportExcel data={filterRecords()} count={checkList.length} />
-      </ControlButtons>
-
+      <Button
+        onClick={() => {
+          setOpen(true);
+        }}
+      >
+        <AddIcon /> Add
+      </Button>
+      <ExportExcel data={ordersList} />
       <Popup
         open={open}
         onClose={() => {
@@ -154,8 +137,6 @@ const Orders = () => {
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
         template={[5, 10, 20, 15, 15, 20, 15]}
-        checkList={checkList}
-        setCheckList={setCheckList}
       />
       <ToastContainer />
     </Wrapper>
