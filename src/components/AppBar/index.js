@@ -7,21 +7,27 @@ import CustomerIcon from "../../icons/customer";
 import EmployeeIcon from "../../icons/employee";
 
 const NavItem = styled.a`
-  width: 100px;
-  height: 100px;
+  width: 150px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
+  padding: 24px;
+  text-align: left;
   color: gray;
   margin: auto;
   color: white;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+
   &:hover {
     background-color: #165a72;
   }
   svg {
     width: 20px;
     height: 20px;
+    display: block;
   }
 `;
 
@@ -30,7 +36,7 @@ const NavBar = styled.div`
   flex-direction: column;
   gap: 0;
   height: fit-content;
-  width: 100px;
+  width: 150px;
   @media (max-width: 768px) {
     flex-direction: row;
     height: 100%;
@@ -38,6 +44,7 @@ const NavBar = styled.div`
 `;
 
 const Wrapper = styled.div`
+  display: fixed;
   background-color: #134b5f;
   height: 100vh;
   @media (max-width: 768px) {
@@ -49,25 +56,27 @@ const Wrapper = styled.div`
 
 const AppBar = () => {
   return (
-    <Wrapper>
-      <NavBar>
-        <NavItem href="/">
-          <HomeIcon />
-          Home{" "}
-        </NavItem>{" "}
-        <NavItem href="/orders">
-          <OrderIcon />
-          Orders{" "}
-        </NavItem>{" "}
-        <NavItem href="/customers">
-          <CustomerIcon /> Customers{" "}
-        </NavItem>{" "}
-        <NavItem href="/employees">
-          <EmployeeIcon />
-          Employees{" "}
-        </NavItem>{" "}
-      </NavBar>{" "}
-    </Wrapper>
+    <div>
+      <Wrapper>
+        <NavBar>
+          <NavItem href="/">
+            <HomeIcon />
+            Home
+          </NavItem>
+          <NavItem href="/orders">
+            <OrderIcon />
+            Orders
+          </NavItem>
+          <NavItem href="/customers">
+            <CustomerIcon /> Customers
+          </NavItem>
+          <NavItem href="/employees">
+            <EmployeeIcon />
+            Employees
+          </NavItem>
+        </NavBar>
+      </Wrapper>
+    </div>
   );
 };
 

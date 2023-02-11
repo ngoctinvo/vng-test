@@ -5,13 +5,13 @@ const INITIAL_STATE = {
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case "CREATE":
+        case "CREATE_ORDER":
             const newList = [...state.ordersList, action.data];
             return {
                 ...state,
                 ordersList: newList,
             };
-        case "UPDATE":
+        case "UPDATE_ORDER":
             {
                 const newList = state.ordersList.map((item) => {
                     if (item.order_number === action.data.order_number) {
@@ -26,7 +26,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                 };
             }
 
-        case "DELETE":
+        case "DELETE_ORDER":
             {
                 const order_num = action.data;
                 const newList = state.ordersList.filter(

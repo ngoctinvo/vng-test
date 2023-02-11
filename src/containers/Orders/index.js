@@ -153,7 +153,7 @@ const Orders = () => {
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[5, 10, 20, 15, 15, 20, 15]}
+        template={[10, 20, 15, 15, 20, 15]}
         checkList={checkList}
         setCheckList={setCheckList}
       />

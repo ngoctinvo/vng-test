@@ -1,20 +1,20 @@
 export const createOrder = (order) => {
     return {
-        type: "CREATE",
+        type: "CREATE_ORDER",
         data: order,
     };
 };
 
 export const updateOrder = (order) => {
     return {
-        type: "UPDATE",
+        type: "UPDATE_ORDER",
         data: order,
     };
 };
 
 export const deleteOrder = (order_number) => {
     return {
-        type: "DELETE",
+        type: "DELETE_ORDER",
         data: order_number,
     };
 };
