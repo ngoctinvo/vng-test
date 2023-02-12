@@ -14,13 +14,14 @@ import AddIcon from "../../icons/add";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ExportExcel from "../../components/ExportExcel";
+import ExportPDF from "../../components/ExportPDF";
 
 const Wrapper = styled.div`
   width: 100%;
+  padding: 20px;
 `;
 
 const ControlButtons = styled.div`
-  padding: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -41,7 +42,6 @@ const Orders = () => {
   const [checkList, setCheckList] = useState([]);
   const dispatch = useDispatch();
   const { ordersList = [] } = useSelector((state) => state.orders);
-  let exportedRecords = [];
   const handleEditRecord = (record, index) => {
     setSelectedOrder({ ...record });
     setOpen(true);
@@ -66,7 +66,23 @@ const Orders = () => {
           <AddIcon /> Add
         </Button>
         <ExportExcel data={filterRecords()} count={checkList.length} />
+        <ExportPDF data={filterRecords()} count={checkList.length} />
       </ControlButtons>
+      <Table
+        records={ordersList}
+        heading={[
+          "Order Number",
+          "Customer ID",
+          "Order Date",
+          "Ship Date",
+          "Employee Number",
+        ]}
+        onEditRecord={handleEditRecord}
+        onDeleteRecord={handleDeleteRecord}
+        template={[10, 20, 15, 15, 20, 15]}
+        checkList={checkList}
+        setCheckList={setCheckList}
+      />
 
       <Popup
         open={open}
@@ -128,7 +144,12 @@ const Orders = () => {
         <Button
           onClick={() => {
             if (selectedOrder.order_number === 0) {
-              dispatch(createOrder(selectedOrder));
+              const generatedOrderNumber = {
+                ...selectedOrder,
+                order_number:
+                  ordersList[ordersList.length - 1].order_number + 1,
+              };
+              dispatch(createOrder(generatedOrderNumber));
               toast("Created");
             } else {
               dispatch(updateOrder(selectedOrder));
@@ -142,21 +163,6 @@ const Orders = () => {
           {selectedOrder.order_number === 0 ? "ADD" : "SAVE"}
         </Button>
       </Popup>
-      <Table
-        records={ordersList}
-        heading={[
-          "Order Number",
-          "Customer ID",
-          "Order Date",
-          "Ship Date",
-          "Employee Number",
-        ]}
-        onEditRecord={handleEditRecord}
-        onDeleteRecord={handleDeleteRecord}
-        template={[10, 20, 15, 15, 20, 15]}
-        checkList={checkList}
-        setCheckList={setCheckList}
-      />
       <ToastContainer />
     </Wrapper>
   );

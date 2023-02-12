@@ -134,6 +134,7 @@ const Table = (props) => {
               align={align}
               onClick={() => {
                 const keyword = Object.keys(records[0])[index];
+                console.log(keyword);
                 const sorted = [...records];
                 sorted.sort((a, b) => {
                   if (typeof a[keyword] === "string") {
@@ -143,6 +144,7 @@ const Table = (props) => {
                   }
                   return a[keyword] - b[keyword];
                 });
+                console.log(sorted);
 
                 setShowingRecords(sorted);
               }}

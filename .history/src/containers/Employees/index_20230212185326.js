@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@linaria/react";
 import Popup from "../../components/Popup";
 import {
-  createCustomer,
-  deleteCustomer,
-  updateCustomer,
-} from "../../redux/action/customersAction";
+  createEmployee,
+  deleteEmployee,
+  updateEmployee,
+} from "../../redux/action/employeesAction";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import AddIcon from "../../icons/add";
@@ -28,8 +28,8 @@ const ControlButtons = styled.div`
   gap: 10px;
 `;
 
-const emptyCustomer = {
-  customer_id: 0,
+const emptyEmployee = {
+  employee_number: 0,
   first_name: "",
   last_name: "",
   street_address: "",
@@ -37,41 +37,47 @@ const emptyCustomer = {
   state: "",
   zipcode: "",
   phone: "",
-  email: "",
+  position: "",
+  hourly_rate: 0,
+  date_hired: "",
 };
 
-const Customers = () => {
+const Employees = () => {
   const [open, setOpen] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState(emptyCustomer);
+  const [selectedEmployee, setSelectedEmployee] = useState(emptyEmployee);
   const [checkList, setCheckList] = useState([]);
   const dispatch = useDispatch();
-  const { customersList = [] } = useSelector((state) => state.customers);
+  const { employeesList = [] } = useSelector((state) => state.employees);
   const handleEditRecord = (record, index) => {
-    setSelectedCustomer({ ...record });
+    setSelectedEmployee({ ...record });
     setOpen(true);
   };
   const handleDeleteRecord = (record, index) => {
-    dispatch(deleteCustomer(record.customer_id));
+    dispatch(deleteEmployee(record.employee_number));
     toast("Deleted");
   };
 
   const filterRecords = () => {
-    return customersList.filter((customer, index) => checkList.includes(index));
+    return employeesList.filter((employee, index) => checkList.includes(index));
   };
 
   return (
     <Wrapper>
       <ControlButtons>
-        <Button onClick={() => setOpen(true)}>
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
           <AddIcon /> Add
         </Button>
         <ExportExcel data={filterRecords()} count={checkList.length} />
         <ExportPDF data={filterRecords()} count={checkList.length} />
       </ControlButtons>
       <Table
-        records={customersList}
+        records={employeesList}
         heading={[
-          "Customer ID",
+          "Employee Number",
           "First Name",
           "Last Name",
           "Street Address",
@@ -79,11 +85,13 @@ const Customers = () => {
           "State",
           "Zipcode",
           "Phone",
-          "Email",
+          "Position",
+          "Hourly Rate",
+          "Date Hired",
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[5, 10, 9, 10, 12, 10, 7, 8, 10, 20, 5]}
+        template={[5, 5, 10, 5, 10, 10, 10, 10, 10, 5, 10, 10]}
         checkList={checkList}
         setCheckList={setCheckList}
       />
@@ -91,121 +99,153 @@ const Customers = () => {
         open={open}
         onClose={() => {
           setOpen(false);
-          setSelectedCustomer({ ...emptyCustomer });
+          setSelectedEmployee({ ...emptyEmployee });
         }}
       >
-        {selectedCustomer.customer_id !== 0 && (
+        {selectedEmployee.employee_number !== 0 && (
           <Input
-            value={selectedCustomer.customer_id}
+            value={selectedEmployee.employee_number}
             placeholder="..."
-            label="Customer number"
+            label="Employee number"
             onChange={(e) =>
-              setSelectedCustomer({
-                ...selectedCustomer,
-                customer_id: e.target.value,
+              setSelectedEmployee({
+                ...selectedEmployee,
+                employee_number: e.target.value,
               })
             }
-            disabled={selectedCustomer === 0}
+            disabled={selectedEmployee === 0}
           />
         )}
         <Input
-          value={selectedCustomer.first_name}
+          value={selectedEmployee.first_name}
           placeholder="first_name..."
           label="first_name"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               first_name: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.last_name}
+          value={selectedEmployee.last_name}
           placeholder="last_name..."
           label="last_name"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               last_name: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.street_address}
+          value={selectedEmployee.street_address}
           placeholder="street_address..."
           label="street_address"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               street_address: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.city}
+          value={selectedEmployee.city}
           placeholder="..."
           label="city"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               city: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.state}
+          value={selectedEmployee.state}
           placeholder="..."
           label="state"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               state: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.zipcode}
+          value={selectedEmployee.zipcode}
           placeholder="..."
           label="zipcode"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               zipcode: e.target.value,
             })
           }
         />
         <Input
-          value={selectedCustomer.phone}
+          value={selectedEmployee.phone}
           placeholder="..."
           label="phone"
           onChange={(e) =>
-            setSelectedCustomer({
-              ...selectedCustomer,
+            setSelectedEmployee({
+              ...selectedEmployee,
               phone: e.target.value,
             })
           }
         />
-
+        <Input
+          value={selectedEmployee.position}
+          placeholder="..."
+          label="position"
+          onChange={(e) =>
+            setSelectedEmployee({
+              ...selectedEmployee,
+              position: e.target.value,
+            })
+          }
+        />
+        <Input
+          value={selectedEmployee.hourly_rate}
+          placeholder="..."
+          label="hourly_rate"
+          onChange={(e) =>
+            setSelectedEmployee({
+              ...selectedEmployee,
+              hourly_rate: e.target.value,
+            })
+          }
+        />
+        <Input
+          value={selectedEmployee.date_hired}
+          placeholder="..."
+          label="date_hired"
+          onChange={(e) =>
+            setSelectedEmployee({
+              ...selectedEmployee,
+              date_hired: e.target.value,
+            })
+          }
+        />
         <Button
           onClick={() => {
-            if (selectedCustomer.customer_id === 0) {
-              const generatedIdCustom = {
-                ...selectedCustomer,
-                customer_id:
-                  customersList[customersList.length - 1].customer_id + 1,
+            if (selectedEmployee.employee_number === 0) {
+              const generatedEmplNum = {
+                ...selectedEmployee,
+                employee_number:
+                  employeesList[employeesList.length - 1].employee_number + 1,
               };
-              dispatch(createCustomer(generatedIdCustom));
+              dispatch(createEmployee(generatedEmplNum));
               toast("Created");
             } else {
-              dispatch(updateCustomer(selectedCustomer));
+              dispatch(updateEmployee(selectedEmployee));
               toast("Updated");
             }
-            setSelectedCustomer({ ...emptyCustomer });
+            setSelectedEmployee({ ...emptyEmployee });
             setOpen(false);
           }}
           width="100%"
         >
-          {selectedCustomer.customer_id === 0 ? "ADD" : "SAVE"}
+          {selectedEmployee.employee_number === 0 ? "ADD" : "SAVE"}
         </Button>
       </Popup>
       <ToastContainer />
@@ -213,4 +253,4 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export default Employees;

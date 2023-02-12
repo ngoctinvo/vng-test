@@ -83,7 +83,7 @@ const Customers = () => {
         ]}
         onEditRecord={handleEditRecord}
         onDeleteRecord={handleDeleteRecord}
-        template={[5, 10, 9, 10, 12, 10, 7, 8, 10, 20, 5]}
+        template={[5, 10, 7, 10, 10, 10, 7, 8, 10, 20, 5]}
         checkList={checkList}
         setCheckList={setCheckList}
       />
